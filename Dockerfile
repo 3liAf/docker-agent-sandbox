@@ -19,6 +19,9 @@ RUN apk update && apk add --no-cache \
 # Create unprivileged sandbox user
 RUN addgroup -S sandboxgroup && adduser -S sandboxuser -G sandboxgroup -h /home/sandboxuser
 
+# Install sandbox integrity validation script
+COPY --chmod=755 sandbox-check.sh /usr/local/bin/sandbox-check
+
 # Set working directory with strict permissions
 WORKDIR /sandbox
 RUN chown -R sandboxuser:sandboxgroup /sandbox
